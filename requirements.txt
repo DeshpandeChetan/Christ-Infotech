@@ -1,0 +1,20 @@
+# Christ Infotech Website - Dependency Reference
+#
+# This is a React + Vite (Node.js/npm) project, NOT a Python project.
+# npm + package.json/package-lock.json are the actual source of truth for dependency
+# resolution and installation. This requirements.txt is provided as a plain-text,
+# pip-style reference listing (as requested) of the exact packages this project uses.
+#
+# To actually install dependencies, run from the project root:
+#   npm install
+#
+# Runtime requirement: Node.js ^20.19.0 or >=22.12.0, npm 9+
+
+# ---- Runtime dependencies (package.json "dependencies") ----
+react==19.2.8
+react-dom==19.2.8
+bootstrap==5.3.8
+
+# ---- Build/development dependencies (package.json "devDependencies") ----
+vite==8.2.2
+@vitejs/plugin-react==6.1.1
