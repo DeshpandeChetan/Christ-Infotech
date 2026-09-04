@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import SectionHeading from '../SectionHeading.jsx'
 import InfiniteMarquee from '../InfiniteMarquee.jsx'
-import demoImage from '../../assets/images/demo-scene.svg'
+import aboutVideo from '../../assets/images/christinfotech imgs/Index/About Us video.mp4'
+import whyChooseUsImage from '../../assets/images/christinfotech imgs/about/Why Choose Us.jpeg'
 import { blogs, collaborations, faqs, features, processSteps, services, testimonials } from '../../data/homeData.js'
 
 export function Hero() {
@@ -14,7 +15,14 @@ export function Collaborations() {
 }
 
 export function About() {
-  return <section id="about" className="section-space bg-soft"><div className="container"><div className="row align-items-center g-5"><div className="col-lg-6"><SectionHeading eyebrow="About Us" title="Your Technology Partner for Digital Growth" align="start" /><p className="section-copy">Christ Infotech helps businesses turn ideas into practical digital solutions that improve efficiency, reduce operational challenges, and support long-term growth. We design and build reliable software, mobile applications, AI systems, and IoT solutions that help organizations work smarter and serve their customers better.</p><p className="section-copy">Our approach is simple — we listen, we plan carefully, and we build solutions that are secure, scalable, and easy to manage.</p><a className="btn btn-outline-primary rounded-3 px-3 py-2" href="#footer">More About Us</a></div><div className="col-lg-5 offset-lg-1"><div className="video-placeholder"><img src={demoImage} alt="Demo collaboration meeting placeholder" /><button type="button" className="play-button" aria-label="Play company video">▶</button>{/* Replace this placeholder with a video element when the final video is supplied. */}</div></div></div></div></section>
+  const videoRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+  const togglePlay = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) { video.play(); setPlaying(true) } else { video.pause(); setPlaying(false) }
+  }
+  return <section id="about" className="section-space bg-soft"><div className="container"><div className="row align-items-center g-5"><div className="col-lg-6"><SectionHeading eyebrow="About Us" title="Your Technology Partner for Digital Growth" align="start" /><p className="section-copy">Christ Infotech helps businesses turn ideas into practical digital solutions that improve efficiency, reduce operational challenges, and support long-term growth. We design and build reliable software, mobile applications, AI systems, and IoT solutions that help organizations work smarter and serve their customers better.</p><p className="section-copy">Our approach is simple — we listen, we plan carefully, and we build solutions that are secure, scalable, and easy to manage.</p><a className="btn btn-outline-primary rounded-3 px-3 py-2" href="#footer">More About Us</a></div><div className="col-lg-5 offset-lg-1"><div className="video-placeholder"><video ref={videoRef} src={aboutVideo} playsInline controls={playing} onClick={togglePlay} onEnded={() => setPlaying(false)} />{!playing && <button type="button" className="play-button" aria-label="Play company video" onClick={togglePlay}>▶</button>}</div></div></div></div></section>
 }
 
 export function Services() {
@@ -22,12 +30,12 @@ export function Services() {
 }
 
 export function WhyChooseUs() {
-  return <section className="section-space bg-soft"><div className="container"><SectionHeading eyebrow="Why Choose Us" title={<>A Structured Approach to<br className="d-none d-md-block" /> Digital Development</>} /><div className="row align-items-center g-5"><div className="col-lg-7"><div className="row g-5">{features.map((f) => <div className="col-sm-6 feature" key={f.title}><span className="feature-icon">{f.icon}</span><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div><div className="col-lg-5"><img className="rounded-media" src={demoImage} alt="Demo team collaboration placeholder" /></div></div></div></section>
+  return <section className="section-space bg-soft"><div className="container"><SectionHeading eyebrow="Why Choose Us" title={<>A Structured Approach to<br className="d-none d-md-block" /> Digital Development</>} /><div className="row align-items-center g-5"><div className="col-lg-7"><div className="row g-5">{features.map((f) => <div className="col-sm-6 feature" key={f.title}><span className="feature-icon">{f.icon}</span><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div><div className="col-lg-5"><img className="rounded-media" src={whyChooseUsImage} alt="Why choose Christ Infotech" /></div></div></div></section>
 }
 
 export function Process() {
   const [active, setActive] = useState(0); const item = processSteps[active]
-  return <section className="section-space"><div className="container"><SectionHeading eyebrow="Process" title={<>Achieving success in three<br className="d-none d-md-block" /> simple steps</>} /><div className="process-tabs d-flex flex-column flex-lg-row justify-content-center" role="tablist">{processSteps.map((step, i) => <button className={i === active ? 'active' : ''} type="button" role="tab" aria-selected={i === active} onClick={() => setActive(i)} key={step.title}><span>{step.icon}</span>{step.label}</button>)}</div><div className="row align-items-center g-5 process-content" key={item.title}><div className="col-lg-6"><img className="rounded-media" src={item.image} alt="Demo process placeholder" /></div><div className="col-lg-5 offset-lg-1"><h3>{item.title}</h3><p>{item.text}</p></div></div></div></section>
+  return <section className="section-space"><div className="container"><SectionHeading eyebrow="Process" title={<>Achieving success in three<br className="d-none d-md-block" /> simple steps</>} /><div className="process-tabs d-flex flex-column flex-lg-row justify-content-center" role="tablist">{processSteps.map((step, i) => <button className={i === active ? 'active' : ''} type="button" role="tab" aria-selected={i === active} onClick={() => setActive(i)} key={step.title}><span>{step.icon}</span>{step.label}</button>)}</div><div className="row align-items-center g-5 process-content" key={item.title}><div className="col-lg-6"><img className="rounded-media" src={item.image} alt={item.title} /></div><div className="col-lg-5 offset-lg-1"><h3>{item.title}</h3><p>{item.text}</p></div></div></div></section>
 }
 
 export function Testimonials() {
