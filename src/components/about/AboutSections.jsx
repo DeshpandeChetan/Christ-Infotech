@@ -22,5 +22,5 @@ export function Delivery() {
 }
 
 export function Team() {
-  return <section id="team" className="section-space bg-soft"><div className="container"><SectionHeading eyebrow="Team" title={<>A team built on expertise and<br className="d-none d-md-block" /> collaboration</>} /><div className="row g-4">{teamMembers.map((member) => <div className="col-sm-6 col-lg-4" key={member.name}><article className="team-card"><img src={member.image} alt={member.name} /><div className="team-info"><h3>{member.name}</h3><p>{member.role}</p></div></article></div>)}</div></div></section>
+  return <section id="team" className="section-space team-section"><div className="container"><SectionHeading eyebrow="Team" title={<>A team built on expertise and<br className="d-none d-md-block" /> collaboration</>} /><div className="row g-4 team-grid mx-auto">{teamMembers.map((member) => <div className="col-sm-6 col-md-4 col-lg-3" key={member.name}><article className="about-team-card"><img src={member.image} alt={member.name} /><div className="about-team-info"><h3>{member.name}</h3><p>{member.role}</p></div></article></div>)}</div></div></section>
 }
